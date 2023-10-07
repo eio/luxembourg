@@ -8,7 +8,6 @@ function updateImageOpacity(opacity) {
     // Update the opacity of the image layer
     imageLayer.setOpacity(opacity);
 }
-
 function updateImageExtent(newExtent) {
     extent = newExtent;
     // Create a new ol.source.ImageStatic with the updated extent
@@ -20,6 +19,10 @@ function updateImageExtent(newExtent) {
     // Set the new source for the image layer
     imageLayer.setSource(newImageSource);
 }
+
+/////////////////////////////
+// BASEMAP AND GEOLOGY IMAGE
+/////////////////////////////
 
 map = new ol.Map({
     target: 'map',
@@ -42,6 +45,10 @@ map = new ol.Map({
     })
 });
 
+///////////////////
+// MULLERTHAL PIN 
+///////////////////
+
 var MULLERTHAL = [6.3075, 49.7904];
 // Create a point feature at a specific coordinate
 var point = new ol.Feature({
@@ -57,7 +64,6 @@ var pointStyle = new ol.style.Style({
 });
 // Set the point style
 point.setStyle(pointStyle);
-
 // Create a vector layer to display the point
 var vectorLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
@@ -66,6 +72,10 @@ var vectorLayer = new ol.layer.Vector({
 });
 // Add the vector layer to the map
 map.addLayer(vectorLayer);
+
+////////////////
+// NO FLY ZONES
+////////////////
 
 // Add the GeoJSON layer to the map
 var geojsonLayer = new ol.layer.Vector({
@@ -77,6 +87,10 @@ var geojsonLayer = new ol.layer.Vector({
 // Add the vector layer to the map
 map.addLayer(geojsonLayer);
 
+////////////
+// GEOCODER
+////////////
+
 // Initialize the OpenLayers Geocoder
 geocoder = new Geocoder('nominatim', {
     provider: 'osm',
@@ -87,10 +101,8 @@ geocoder = new Geocoder('nominatim', {
     autoComplete: true,
     keepOpen: true,
 });
-
 // Add the geocoder control to the map
 map.addControl(geocoder);
-
 // Handle geocoder result selection
 geocoder.on('addresschosen', function(event) {
     var feature = event.feature;
@@ -107,7 +119,7 @@ geocoder.on('addresschosen', function(event) {
 // EVENT LISTENERS
 ///////////////////
 
-// Add a keydown event listener to the document
+// Show/Hide the Geology Image layer
 document.addEventListener('keydown', function(event) {
     if (event.key === 'g' || event.key === 'G') {
         // Toggle the visibility of the image layer
@@ -115,7 +127,7 @@ document.addEventListener('keydown', function(event) {
         map.getLayers().getArray()[1].setVisible(imageLayerVisible);
     }
 });
-// Add an input event listener to the opacity slider
+// Add Opacity Slider for Geology Image layer
 var opacitySlider = document.getElementById('opacitySlider');
 opacitySlider.addEventListener('input', function() {
     var opacity = parseFloat(opacitySlider.value);
