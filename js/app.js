@@ -47,7 +47,6 @@ var MULLERTHAL = [6.3075, 49.7904];
 var point = new ol.Feature({
     geometry: new ol.geom.Point(ol.proj.fromLonLat(MULLERTHAL)) // Set the coordinate of the point
 });
-
 // Style for the point (you can customize this)
 var pointStyle = new ol.style.Style({
     image: new ol.style.Circle({
@@ -56,7 +55,7 @@ var pointStyle = new ol.style.Style({
         stroke: new ol.style.Stroke({ color: 'white', width: 2 })
     })
 });
-
+// Set the point style
 point.setStyle(pointStyle);
 
 // Create a vector layer to display the point
@@ -65,9 +64,18 @@ var vectorLayer = new ol.layer.Vector({
         features: [point]
     })
 });
-
 // Add the vector layer to the map
 map.addLayer(vectorLayer);
+
+// Add the GeoJSON layer to the map
+var geojsonLayer = new ol.layer.Vector({
+    source: new ol.source.Vector({
+        url: 'data/uav_no_fly_zones.json',
+        format: new ol.format.GeoJSON()
+    })
+});
+// Add the vector layer to the map
+map.addLayer(geojsonLayer);
 
 // Initialize the OpenLayers Geocoder
 geocoder = new Geocoder('nominatim', {

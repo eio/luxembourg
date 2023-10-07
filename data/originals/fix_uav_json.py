@@ -4,7 +4,8 @@ import json
 input_file = "uav_202310071657.json"
 output_file = "uav_no_fly_zones.json"
 
-with open(input_file, "r", encoding="utf-8-sig") as infile:  # Use utf-8-sig encoding
+# Use utf-8-sig encoding to open the file
+with open(input_file, "r", encoding="utf-8-sig") as infile:
     geojson_data = json.load(infile)
 
 # Create a new GeoJSON FeatureCollection
