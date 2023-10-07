@@ -11,14 +11,12 @@ function updateImageOpacity(opacity) {
 
 function updateImageExtent(newExtent) {
     extent = newExtent;
-
     // Create a new ol.source.ImageStatic with the updated extent
     var newImageSource = new ol.source.ImageStatic({
         url: 'lux_geology.png', // Replace with your image URL or path
         projection: 'EPSG:4326',
         imageExtent: extent
     });
-
     // Set the new source for the image layer
     imageLayer.setSource(newImageSource);
 }
