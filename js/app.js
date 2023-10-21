@@ -58,7 +58,7 @@ var point = new ol.Feature({
 var pointStyle = new ol.style.Style({
     image: new ol.style.Circle({
         radius: 7,
-        fill: new ol.style.Fill({ color: 'red' }),
+        fill: new ol.style.Fill({ color: 'green' }),
         stroke: new ol.style.Stroke({ color: 'white', width: 2 })
     })
 });
@@ -76,12 +76,27 @@ map.addLayer(vectorLayer);
 // NO FLY ZONES
 ////////////////
 
+// Define the style for the GeoJSON features
+var noFlyStyle = function(feature) {
+    return new ol.style.Style({
+        fill: new ol.style.Fill({
+            // Reddish fill color with 20% opacity
+            color: 'rgba(255, 0, 0, 0.2)'
+        }),
+        stroke: new ol.style.Stroke({
+            // Reddish stroke color
+            color: 'red',
+            width: 1
+        })
+    });
+};
 // Add the GeoJSON layer to the map
 var geojsonLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
         url: 'data/uav_no_fly_zones.json',
         format: new ol.format.GeoJSON()
-    })
+    }),
+    style: noFlyStyle
 });
 map.addLayer(geojsonLayer);
 
