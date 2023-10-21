@@ -41,7 +41,7 @@ map = new ol.Map({
     ],
     view: new ol.View({
         center: ol.proj.fromLonLat([6.1, 49.8]), // Centered in Luxembourg
-        zoom: 6 // You can adjust the zoom level as needed
+        zoom: 9
     })
 });
 
@@ -70,7 +70,6 @@ var vectorLayer = new ol.layer.Vector({
         features: [point]
     })
 });
-// Add the vector layer to the map
 map.addLayer(vectorLayer);
 
 ////////////////
@@ -84,7 +83,6 @@ var geojsonLayer = new ol.layer.Vector({
         format: new ol.format.GeoJSON()
     })
 });
-// Add the vector layer to the map
 map.addLayer(geojsonLayer);
 
 ////////////
